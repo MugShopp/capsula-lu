@@ -38,10 +38,7 @@
     .ampulheta {
       width: 110px;
       margin: 20px 0;
-      animation: girar 30s linear infinite;
     }
-
-    @keyframes girar { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
     #contador {
       font-size: 16px;
@@ -102,9 +99,11 @@
 <body>
 
   <h1>Uma mensagem especial te espera ao final da contagem regressiva.</h1>
-  <p>Uma cápsula do tempo é um convite para sentir...</p>
+  <p>Uma cápsula do tempo é um convite para sentir. Para lembrar do que importa, registrar sonhos, dizer o que o coração sente — seja para você mesma, ou para alguém que você ama.</p>
 
-  <img class="ampulheta" src="Ampulheta.png" alt="Ampulheta girando" />
+  <!-- Aqui troquei pela lupa animada -->
+  <img class="ampulheta" src="https://i.postimg.cc/g2Wh65Pc/giphy-3.gif" alt="Lupa animada" />
+
   <div id="contador">Iniciando...</div>
   <button onclick="reiniciarContagem()">Recomeçar</button>
 
@@ -119,7 +118,7 @@
   <div class="assinatura">Feito por MugShopp Presentes Personalizados.</div>
 
   <script>
-    // Data-alvo ISO confiável
+    // Data alvo: 17 de outubro de 2030 às 00:00
     const dataAlvo = new Date("2030-10-17T00:00:00").getTime();
 
     function atualizarContador() {
