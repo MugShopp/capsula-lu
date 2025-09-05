@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cápsula do Tempo - MugShopp</title>
+  <style>
+    body {
+      margin: 0;
+      padding-top: 60px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f6f9f9;
+      color: #2e2e2e;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      min-height: 100vh;
+      box-sizing: border-box;
+    }
+
+    h1 {
+      font-size: 24px;
+      margin: 0 20px 20px;
+      font-weight: 600;
+      color: #222;
+    }
+
+    p {
+      max-width: 600px;
+      margin: 10px 20px;
+      font-size: 16px;
+      color: #444;
+      line-height: 1.5;
+    }
+
+    .ampulheta {
+      width: 110px;
+      height: auto;
+      margin: 20px 0;
+      animation: girar 30s linear infinite;
+    }
+
+    @keyframes girar {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    #contador {
+      font-size: 16px;
+      font-weight: 400;
+      margin: 20px 0;
+      color: #3b3b3b;
+      letter-spacing: 0.8px;
+      padding: 10px 24px;
+      border: 1.5px solid #ccc;
+      border-radius: 10px;
+      background-color: #ffffff;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      display: inline-block;
+      user-select: none;
+      min-width: 280px;
+    }
+
+    button {
+      margin-top: 14px;
+      padding: 10px 26px;
+      font-size: 16px;
+      background-color: #000000;
+      color: #ffffff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background-color 0.3s ease;
+      letter-spacing: 0.8px;
+    }
+
+    button:hover {
+      background-color: #333333;
+    }
+
+    .logo-rodape {
+      width: 160px;
+      margin-top: 40px;
+    }
+
+    .assinatura {
+      font-size: 13px;
+      color: #666;
+      margin-top: 8px;
+      margin-bottom: 30px;
+    }
+
+    #mensagem-final {
+      margin-top: 30px;
+      display: none;
+    }
+
+    video {
+      margin-top: 20px;
+      max-width: 90%;
+      height: auto;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Uma mensagem especial te espera ao final da contagem regressiva.</h1>
+
+  <p>Uma cápsula do tempo é um convite para sentir. Para lembrar do que importa, registrar sonhos, dizer o que o coração sente — seja para você mesma, ou para alguém que você ama.</p>
+  
+  <p>Quando o vídeo aparecer, assista com carinho. Se quiser reviver esse momento, é só clicar em <strong>"Recomeçar"</strong> ou atualizar a página.  
+  A contagem vai começar de novo — e tudo bem! Afinal, recordar esse instante pode virar um ritual bonito de amor todo ano. 💙</p>
+
+  <img class="ampulheta" src="Ampulheta.png" alt="Ampulheta girando" />
+
+  <div id="contador"></div>
+
+  <button onclick="reiniciarContagem()">Recomeçar</button>
+
+  <div id="mensagem-final">
+    <video controls>
+      <source src="capsula_VQ6JuIae.mp4" type="video/mp4" />
+      Seu navegador não suporta vídeo HTML5.
+    </video>
+  </div>
+
+  <img class="logo-rodape" src="https://i.postimg.cc/7LWQCZjQ/Logo-Alta-Resolu-o-1.png" alt="Logo MugShopp" />
+  <div class="assinatura">Feito por MugShopp Presentes Personalizados.</div>
+
+  <script>
+    // Data alvo: 17 de outubro de 2030 às 00:00
+    const dataAlvo = new Date("October 17, 2030 00:00:00").getTime();
+
+    function atualizarContador() {
+      const agora = new Date().getTime();
+      const distancia = dataAlvo - agora;
+
+      if (distancia <= 0) {
+        document.getElementById('contador').textContent = '';
+        document.getElementById('mensagem-final').style.display = 'block';
+        clearInterval(intervalo);
+        return;
+      }
+
+      const dias = Math.floor(distancia / (1000 * 60 * 60 * 24));
+      const horas = Math.floor((distancia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutos = Math.floor((distancia % (1000 * 60 * 60)) / (1000 * 60));
+      const segundos = Math.floor((distancia % (1000 * 60)) / 1000);
+
+      document.getElementById('contador').textContent =
+        `Faltam ${dias} dias, ${horas}h ${minutos}m ${segundos}s para abrir a cápsula.`;
+    }
+
+    function reiniciarContagem() {
+      window.location.reload();
+    }
+
+    const intervalo = setInterval(atualizarContador, 1000);
+    window.onload = atualizarContador;
+  </script>
+</body>
+</html>
