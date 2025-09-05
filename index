@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Cápsula do Tempo - MugShopp</title>
+  <title>Cápsula do Tempo – MugShopp</title>
   <style>
     body {
       margin: 0;
@@ -37,19 +37,11 @@
 
     .ampulheta {
       width: 110px;
-      height: auto;
       margin: 20px 0;
       animation: girar 30s linear infinite;
     }
 
-    @keyframes girar {
-      from {
-        transform: rotate(0deg);
-      }
-      to {
-        transform: rotate(360deg);
-      }
-    }
+    @keyframes girar { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
     #contador {
       font-size: 16px;
@@ -60,42 +52,28 @@
       padding: 10px 24px;
       border: 1.5px solid #ccc;
       border-radius: 10px;
-      background-color: #ffffff;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      background-color: #fff;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
       display: inline-block;
       user-select: none;
-      min-width: 280px;
+      min-width: 260px;
+      word-wrap: break-word;
     }
 
     button {
       margin-top: 14px;
       padding: 10px 26px;
       font-size: 16px;
-      background-color: #000000;
-      color: #ffffff;
+      background-color: #000;
+      color: #fff;
       border: none;
       border-radius: 8px;
       cursor: pointer;
       font-weight: 600;
-      transition: background-color 0.3s ease;
+      transition: background-color 0.3s;
       letter-spacing: 0.8px;
     }
-
-    button:hover {
-      background-color: #333333;
-    }
-
-    .logo-rodape {
-      width: 160px;
-      margin-top: 40px;
-    }
-
-    .assinatura {
-      font-size: 13px;
-      color: #666;
-      margin-top: 8px;
-      margin-bottom: 30px;
-    }
+    button:hover { background-color: #333; }
 
     #mensagem-final {
       margin-top: 30px;
@@ -108,21 +86,26 @@
       height: auto;
       border-radius: 10px;
     }
+
+    .logo-rodape {
+      width: 160px;
+      margin-top: 40px;
+    }
+    .assinatura {
+      font-size: 13px;
+      color: #666;
+      margin-top: 8px;
+      margin-bottom: 30px;
+    }
   </style>
 </head>
 <body>
 
   <h1>Uma mensagem especial te espera ao final da contagem regressiva.</h1>
-
-  <p>Uma cápsula do tempo é um convite para sentir. Para lembrar do que importa, registrar sonhos, dizer o que o coração sente — seja para você mesma, ou para alguém que você ama.</p>
-  
-  <p>Quando o vídeo aparecer, assista com carinho. Se quiser reviver esse momento, é só clicar em <strong>"Recomeçar"</strong> ou atualizar a página.  
-  A contagem vai começar de novo — e tudo bem! Afinal, recordar esse instante pode virar um ritual bonito de amor todo ano. 💙</p>
+  <p>Uma cápsula do tempo é um convite para sentir...</p>
 
   <img class="ampulheta" src="Ampulheta.png" alt="Ampulheta girando" />
-
-  <div id="contador"></div>
-
+  <div id="contador">Iniciando...</div>
   <button onclick="reiniciarContagem()">Recomeçar</button>
 
   <div id="mensagem-final">
@@ -136,12 +119,18 @@
   <div class="assinatura">Feito por MugShopp Presentes Personalizados.</div>
 
   <script>
-    // Data alvo: 17 de outubro de 2030 às 00:00 (formato ISO para compatibilidade)
+    // Data-alvo ISO confiável
     const dataAlvo = new Date("2030-10-17T00:00:00").getTime();
 
     function atualizarContador() {
-      const agora = new Date().getTime();
+      const agora = Date.now();
       const distancia = dataAlvo - agora;
+
+      if (isNaN(dataAlvo)) {
+        document.getElementById('contador').textContent = 'Erro na data de destino';
+        clearInterval(intervalo);
+        return;
+      }
 
       if (distancia <= 0) {
         document.getElementById('contador').textContent = '';
@@ -156,15 +145,15 @@
       const segundos = Math.floor((distancia % (1000 * 60)) / 1000);
 
       document.getElementById('contador').textContent =
-        `Faltam ${dias} dias, ${horas}h ${minutos}m ${segundos}s para abrir a cápsula.`;
+        `${dias}d ${horas}h ${minutos}m ${segundos}s para abrir a cápsula.`;
     }
 
     function reiniciarContagem() {
-      window.location.reload();
+      location.reload();
     }
 
     const intervalo = setInterval(atualizarContador, 1000);
-    window.onload = atualizarContador;
+    window.addEventListener('load', atualizarContador);
   </script>
 </body>
 </html>
