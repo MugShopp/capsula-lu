@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Cápsula do Tempo – MugShopp</title>
+  <title>Cápsula do Tempo - MugShopp</title>
   <style>
     body {
       margin: 0;
@@ -37,7 +37,18 @@
 
     .ampulheta {
       width: 110px;
+      height: auto;
       margin: 20px 0;
+      animation: girar 30s linear infinite;
+    }
+
+    @keyframes girar {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
     }
 
     #contador {
@@ -49,28 +60,43 @@
       padding: 10px 24px;
       border: 1.5px solid #ccc;
       border-radius: 10px;
-      background-color: #fff;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      background-color: #ffffff;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
       display: inline-block;
       user-select: none;
       min-width: 260px;
-      word-wrap: break-word;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
     button {
       margin-top: 14px;
       padding: 10px 26px;
       font-size: 16px;
-      background-color: #000;
-      color: #fff;
+      background-color: #000000;
+      color: #ffffff;
       border: none;
       border-radius: 8px;
       cursor: pointer;
       font-weight: 600;
-      transition: background-color 0.3s;
+      transition: background-color 0.3s ease;
       letter-spacing: 0.8px;
     }
-    button:hover { background-color: #333; }
+
+    button:hover {
+      background-color: #333333;
+    }
+
+    .logo-rodape {
+      width: 160px;
+      margin-top: 40px;
+    }
+
+    .assinatura {
+      font-size: 13px;
+      color: #666;
+      margin-top: 8px;
+      margin-bottom: 30px;
+    }
 
     #mensagem-final {
       margin-top: 30px;
@@ -83,28 +109,21 @@
       height: auto;
       border-radius: 10px;
     }
-
-    .logo-rodape {
-      width: 160px;
-      margin-top: 40px;
-    }
-    .assinatura {
-      font-size: 13px;
-      color: #666;
-      margin-top: 8px;
-      margin-bottom: 30px;
-    }
   </style>
 </head>
 <body>
 
   <h1>Uma mensagem especial te espera ao final da contagem regressiva.</h1>
+
   <p>Uma cápsula do tempo é um convite para sentir. Para lembrar do que importa, registrar sonhos, dizer o que o coração sente — seja para você mesma, ou para alguém que você ama.</p>
+  
+  <p>Quando o vídeo aparecer, assista com carinho. Se quiser reviver esse momento, é só clicar em <strong>"Recomeçar"</strong> ou atualizar a página.  
+  A contagem vai começar de novo — e tudo bem! Afinal, recordar esse instante pode virar um ritual bonito de amor todo ano. 💙</p>
 
-  <!-- Aqui troquei pela lupa animada -->
-  <img class="ampulheta" src="https://i.postimg.cc/g2Wh65Pc/giphy-3.gif" alt="Lupa animada" />
+  <img class="ampulheta" src="Ampulheta.png" alt="Ampulheta girando" />
 
-  <div id="contador">Iniciando...</div>
+  <div id="contador"></div>
+
   <button onclick="reiniciarContagem()">Recomeçar</button>
 
   <div id="mensagem-final">
@@ -122,14 +141,8 @@
     const dataAlvo = new Date("2030-10-17T00:00:00").getTime();
 
     function atualizarContador() {
-      const agora = Date.now();
+      const agora = new Date().getTime();
       const distancia = dataAlvo - agora;
-
-      if (isNaN(dataAlvo)) {
-        document.getElementById('contador').textContent = 'Erro na data de destino';
-        clearInterval(intervalo);
-        return;
-      }
 
       if (distancia <= 0) {
         document.getElementById('contador').textContent = '';
@@ -148,11 +161,11 @@
     }
 
     function reiniciarContagem() {
-      location.reload();
+      window.location.reload();
     }
 
     const intervalo = setInterval(atualizarContador, 1000);
-    window.addEventListener('load', atualizarContador);
+    window.onload = atualizarContador;
   </script>
 </body>
 </html>
