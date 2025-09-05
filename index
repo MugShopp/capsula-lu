@@ -136,8 +136,8 @@
   <div class="assinatura">Feito por MugShopp Presentes Personalizados.</div>
 
   <script>
-    // Data alvo: 17 de outubro de 2030 às 00:00
-    const dataAlvo = new Date("October 17, 2030 00:00:00").getTime();
+    // Data alvo: 17 de outubro de 2030 às 00:00 (formato ISO para compatibilidade)
+    const dataAlvo = new Date("2030-10-17T00:00:00").getTime();
 
     function atualizarContador() {
       const agora = new Date().getTime();
